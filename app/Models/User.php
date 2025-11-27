@@ -60,7 +60,8 @@ class User extends Authenticatable
         return $this->belongsTo(Institution::class);
     }
 
-    public function campaigns(){
+    public function campaigns()
+    {
         return $this->hasMany(Campaign::class);
     }
 
@@ -84,10 +85,10 @@ class User extends Authenticatable
         return $this->belongsTo(Rule::class);
     }
 
-    public function scopeUsersUnit($query,$role)
+    public function scopeUsersUnit($query, $role)
     {
-        if($role){
-            return $query->where('institution_id', currentInstitutionId())->whereRelation('rule','name',$role);
+        if ($role) {
+            return $query->where('institution_id', currentInstitutionId())->whereRelation('rule', 'name', $role);
         }
 
         return $query;
@@ -140,24 +141,22 @@ class User extends Authenticatable
     {
         return $this->avatar
             ? asset('storage/' . $this->avatar)
-            : asset('images/default-avatar.png');
+            : asset('images/avatars/avatar-default.png');
     }
 
     public function hasModules(string $moduleName): bool
     {
-   
 
-        $modules = $this->modules; 
 
-       $modules = $this->modules; 
+        $modules = $this->modules;
 
-   
+        $modules = $this->modules;
+
+
         if ($modules->isEmpty()) {
             return false;
         }
 
         return $modules->contains('title', $moduleName);
- 
-   
     }
 }
